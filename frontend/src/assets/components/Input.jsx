@@ -1,7 +1,7 @@
 import { useState } from "react"
 import axios from "axios"
 
-
+const BASE = import.meta.env.VITE_URL;
 
 
 
@@ -15,7 +15,7 @@ export default function Input({newRefresh}){
     console.log(input)
 
     try {
-        const response = await axios.post('http://localhost:8083/',{
+        const response = await axios.post(`${BASE}/`,{
             input:input
         })
         console.log(response.data.body)

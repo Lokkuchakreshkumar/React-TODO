@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useState,useEffect } from "react";
-
+const BASE = import.meta.env.VITE_URL;
 
 export default function Show({refresh}){
     let [data,setData] = useState([])
@@ -8,7 +8,7 @@ export default function Show({refresh}){
     let [tick_refresh,settickrefresh] = useState(0);
     useEffect(()=>{
  async function getData(){
-        let response = await axios.get('http://localhost:8083/')
+        let response = await axios.get(`${BASE}`)
         console.log(response.data)
          setData(response.data)
     }
@@ -16,7 +16,7 @@ export default function Show({refresh}){
     },[refresh,delete_item,tick_refresh])
    
     let handleDelete = async (id) =>{
-        let response = await axios.post('http://localhost:8083/delete',{
+        let response = await axios.post(`${BASE}/delete`,{
          id: id
         })
         console.log(response)
@@ -25,7 +25,7 @@ export default function Show({refresh}){
  }
  let handleTick = async(id,event)=>{
              console.log(event.target.checked)
-             let response = await axios.post('http://localhost:8083/tick',{
+             let response = await axios.post(`${BASE}/tick`,{
                id:id
              })
              console.log('hi')
